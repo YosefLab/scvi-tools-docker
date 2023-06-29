@@ -42,9 +42,9 @@ jobs:
         with:
           context: ./images
           push: true
-          tags: martinkim0/scvi-tools:ubuntu-${{ ubuntu-version }}_mamba-${{ mamba-version}}_python-${{ python-version }}_cuda-${{ cuda-version }}
+          tags: martinkim0/scvi-tools:ubuntu-${{ matrix.ubuntu-version }}_mamba-${{ matrix.mamba-version}}_python-${{ matrix.python-version }}_cuda-${{ matrix.cuda-version }}
           build-args:
-            ubuntu_version: ${{ ubuntu-version }}
-            mamba_version: ${{ mamba-version}}
-            python_version: ${{ python-version }}
-            cuda_version: ${{ cuda-version }}
+            ubuntu_version: ${{ matrix.ubuntu-version }}
+            mamba_version: ${{ matrix.mamba-version}}
+            python_version: ${{ matrix.python-version }}
+            cuda_version: ${{ matrix.cuda-version }}
