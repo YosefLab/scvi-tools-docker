@@ -45,18 +45,12 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      - name: Login to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
       - name: Build and push
         uses: mr-smithers-excellent/docker-build-push@v6
         with:
           image: martinkim0/scvi-tools
           registry: docker.io
           tags: windows-test
-          dockerfile: ./images/windows/cuda/base
+          dockerfile: ./images/windows/cuda/base/Dockerfile
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
