@@ -21,9 +21,9 @@ on:
         default: "3.11"
         type: choice
         options:
-          - "3.11"
-          - "3.10"
           - "3.9"
+          - "3.10"
+          - "3.11"
 
       cuda-version:
         description: CUDA major version
@@ -31,12 +31,8 @@ on:
         default: "11"
         type: choice
         options:
-          - "12"
           - "11"
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+          - "12"
 
 jobs:
   docker:
@@ -63,7 +59,7 @@ jobs:
         with:
           context: ./images
           push: true
-          tags: martinkim0/scvi-tools:ubuntu-${{ inputs.ubuntu-version }}mamba-${{ inputs.mamba-version}}-python-${{ inputs.python-version }}-cuda-${{ inputs.cuda-version }}
+          tags: martinkim0/scvi-tools:ubuntu-${{ inputs.ubuntu-version }}-mamba-${{ inputs.mamba-version}}-python-${{ inputs.python-version }}-cuda-${{ inputs.cuda-version }}
           build-args: |
             UBUNTU_VERSION=${{ inputs.ubuntu-version }}
             MAMBA_VERSION=${{ inputs.mamba-version }}
