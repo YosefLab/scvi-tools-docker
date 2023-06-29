@@ -16,11 +16,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - ubuntu-version: [latest]
-          - mamba-version: [latest]
-          - cuda-version: [11]
-          - python-version: [3.9, 3.10, 3.11]
+        ubuntu-version: [latest]
+        mamba-version: [latest]
+        cuda-version: [11]
+        python-version: [3.9, 3.10, 3.11]
 
     steps:
       - name: Checkout
