@@ -20,7 +20,7 @@ RUN mamba run -p /env \
     python -m pip cache purge
 
 ARG UBUNTU_VERSION=latest
-FROM ubuntu:${UNBUNTU_VERSION}
+FROM ubuntu:${UBUNTU_VERSION}
 
 COPY --from=mamba /env /env
 
