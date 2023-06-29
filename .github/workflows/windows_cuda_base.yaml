@@ -3,7 +3,7 @@ name: windows-cuda-base
 on:
   workflow_dispatch:
     inputs:
-      ubuntu-version:
+      windows-version:
         description: Windows version
         required: true
         default: ltsc2022
@@ -60,4 +60,3 @@ jobs:
           context: ./images/windows/cuda/base
           push: true
           tags: martinkim0/scvi-tools:windows-test
-          build-args: |
