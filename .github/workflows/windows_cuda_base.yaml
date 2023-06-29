@@ -52,8 +52,11 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and push
-        uses: docker/build-push-action@v4
+        uses: mr-smithers-excellent/docker-build-push@v6
         with:
-          context: ./images/windows/cuda/base
-          push: true
-          tags: martinkim0/scvi-tools:windows-test
+          image: martinkim0/scvi-tools
+          registry: https://hub.docker.com/
+          tags: windows-test
+          dockerfile: ./images/windows/cuda/base
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
