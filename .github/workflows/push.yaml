@@ -43,8 +43,4 @@ jobs:
           context: ./images
           push: true
           tags: martinkim0/scvi-tools:ubuntu-${{ matrix.ubuntu-version }}_mamba-${{ matrix.mamba-version}}_python-${{ matrix.python-version }}_cuda-${{ matrix.cuda-version }}
-          build-args:
-            ubuntu_version: ${{ matrix.ubuntu-version }}
-            mamba_version: ${{ matrix.mamba-version}}
-            python_version: ${{ matrix.python-version }}
-            cuda_version: ${{ matrix.cuda-version }}
+          build-args: ubuntu_version=${{ matrix.ubuntu-version }}, mamba_version=${{ matrix.mamba-version}}, python_version=${{ matrix.python-version }}, cuda_version=${{ matrix.cuda-version }}
