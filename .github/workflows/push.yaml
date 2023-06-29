@@ -63,7 +63,7 @@ jobs:
         with:
           context: ./images
           push: true
-          tags: martinkim0/scvi-tools:ubuntu-${{ inputs.ubuntu-version }}-mamba-${{ inputs.mamba-version}}-python-${{ inputs.python-version }}-cuda-${{ inputs.cuda-version }}
+          tags: martinkim0/scvi-tools:ubuntu-${{ inputs.ubuntu-version }}mamba-${{ inputs.mamba-version}}-python-${{ inputs.python-version }}-cuda-${{ inputs.cuda-version }}
           build-args: |
             UBUNTU_VERSION=${{ inputs.ubuntu-version }}
             MAMBA_VERSION=${{ inputs.mamba-version }}

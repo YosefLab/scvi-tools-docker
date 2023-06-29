@@ -1,4 +1,6 @@
+ARG UBUNTU_VERSION=latest
 ARG MAMBA_VERSION=latest
+
 FROM condaforge/mambaforge:${MAMBA_VERSION} AS mamba
 
 ARG PYTHON_VERSION=3.11
@@ -19,7 +21,6 @@ RUN mamba run -p /env \
     mamba run -p /env \
     python -m pip cache purge
 
-ARG UBUNTU_VERSION=latest
 FROM ubuntu:${UBUNTU_VERSION}
 
 COPY --from=mamba /env /env
