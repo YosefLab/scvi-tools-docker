@@ -55,7 +55,7 @@ jobs:
         uses: mr-smithers-excellent/docker-build-push@v6
         with:
           image: martinkim0/scvi-tools
-          registry: https://hub.docker.com/
+          registry: docker.io
           tags: windows-test
           dockerfile: ./images/windows/cuda/base
           username: ${{ secrets.DOCKERHUB_USERNAME }}
