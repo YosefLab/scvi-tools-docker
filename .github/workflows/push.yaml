@@ -5,24 +5,47 @@ on:
     branches:
       - "main"
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   docker:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix::
+        include:
+          - ubuntu-version: [latest]
+          - mamba-version: [latest]
+          - cuda-version: [11]
+          - python-version: [3.9, 3.10, 3.11]
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
+
       - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
           context: ./images
           push: true
-          tags: martinkim0/scvi-tools:test
+          tags: martinkim0/scvi-tools:ubuntu-${{ ubuntu-version }}_mamba-${{ mamba-version}}_python-${{ python-version }}_cuda-${{ cuda-version }}
+          build-args:
+            ubuntu_version: ${{ ubuntu-version }}
+            mamba_version: ${{ mamba-version}}
+            python_version: ${{ python-version }}
+            cuda_version: ${{ cuda-version }}
