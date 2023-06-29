@@ -15,7 +15,7 @@ jobs:
 
     strategy:
       fail-fast: false
-      matrix::
+      matrix:
         include:
           - ubuntu-version: [latest]
           - mamba-version: [latest]
