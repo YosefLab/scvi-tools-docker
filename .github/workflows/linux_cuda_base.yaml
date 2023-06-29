@@ -1,4 +1,4 @@
-name: docker-hub-push
+name: linux-cuda-base
 
 on:
   workflow_dispatch:
@@ -57,7 +57,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
-          context: ./images
+          context: ./images/linux/cuda/base
           push: true
           tags: martinkim0/scvi-tools:ubuntu-${{ inputs.ubuntu-version }}-mamba-${{ inputs.mamba-version}}-python-${{ inputs.python-version }}-cuda-${{ inputs.cuda-version }}
           build-args: |
