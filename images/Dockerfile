@@ -1,25 +1,25 @@
-ARG ubuntu_version=latest
-ARG mamba_version=latest
-ARG python_version=3.11
-ARG cuda_version=11
+ARG MAMBA_VERSION=latest
+FROM condaforge/mambaforge:${MAMBA_VERSION} AS mamba
 
-FROM condaforge/mambaforge:$mamba_version AS mamba
-
+ARG PYTHON_VERSION=3.11
 RUN mamba create --copy -y -p /env \
-    python=$python_version -c conda-forge && \
+    python=${PYTHON_VERSION} -c conda-forge && \
     mamba clean -ayf
 
+ARG CUDA_VERSION=11
 RUN mamba install -y -p /env \
-    pytorch torchvision torchaudio pytorch-cuda=$cuda_version \
+    pytorch torchvision torchaudio pytorch-cuda=${CUDA_VERSION} \
     -c pytorch -c nvidia -c conda-forge && \
     mamba clean -ayf
 
+ARG CUDA_VERSION=11
 RUN mamba run -p /env \
     python -m pip install --no-cache-dir --upgrade \
-    jax[cuda$cuda_version_pip] -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html && \
+    jax[cuda${CUDA_VERSION}_pip] -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html && \
     mamba run -p /env \
     python -m pip cache purge
 
+ARG UBUNTU_VERSION=latest
 FROM ubuntu:${ubuntu_version}
 
 COPY --from=mamba /env /env

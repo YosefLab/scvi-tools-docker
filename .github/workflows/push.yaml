@@ -66,7 +66,7 @@ jobs:
           push: true
           tags: martinkim0/scvi-tools:ubuntu-${{ inputs.ubuntu-version }}-mamba-${{ inputs.mamba-version}}-python-${{ inputs.python-version }}-cuda-${{ inputs.cuda-version }}
           build-args: |
-            ubuntu_version=${{ inputs.ubuntu-version }}
-            mamba_version=${{ inputs.mamba-version }}
-            python_version=${{ inputs.python-version }}
-            cuda_version=${{ inputs.cuda-version }}
+            UBUNTU_VERSION=${{ inputs.ubuntu-version }}
+            MAMBA_VERSION=${{ inputs.mamba-version }}
+            PYTHON_VERSION=${{ inputs.python-version }}
+            CUDA_VERSION=${{ inputs.cuda-version }}
