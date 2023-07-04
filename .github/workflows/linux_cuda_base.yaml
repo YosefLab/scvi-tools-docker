@@ -36,7 +36,7 @@ on:
 
 jobs:
   docker:
-    runs-on: ubuntu-${{ inputs.ubuntu-version }}
+    runs-on: [self-hosted, Linux, X64, CUDA]
 
     steps:
       - name: Checkout
