@@ -10,7 +10,7 @@ RUN mamba create --copy -y -p /env \
 
 ARG CUDA_VERSION=11
 RUN mamba install -y -p /env \
-    pytorch torchvision torchaudio pytorch-cuda=${CUDA_VERSION} cuda-nvcc=${CUDA_VERSION} \
+    pytorch pytorch-cuda=${CUDA_VERSION} cuda-nvcc=${CUDA_VERSION} \
     -c pytorch -c nvidia -c conda-forge && \
     mamba clean -ayf
 
