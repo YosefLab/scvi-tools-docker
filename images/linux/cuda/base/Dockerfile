@@ -26,3 +26,7 @@ FROM ubuntu:${UBUNTU_VERSION}
 COPY --from=mamba /env /env
 
 ENV PATH "/env/bin:$PATH"
+
+RUN apt update
+
+RUN apt install -y git
