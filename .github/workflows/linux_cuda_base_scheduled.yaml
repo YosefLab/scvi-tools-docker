@@ -1,0 +1,67 @@
+name: linux-cuda-base
+
+on:
+  workflow_dispatch:
+    inputs:
+      ubuntu-version:
+        description: Ubuntu version
+        required: true
+        default: latest
+        type: string
+
+      mamba-version:
+        description: Mamba version
+        required: true
+        default: latest
+        type: string
+
+      python-version:
+        description: Python version
+        required: true
+        default: "3.11"
+        type: choice
+        options:
+          - "3.9"
+          - "3.10"
+          - "3.11"
+
+      cuda-version:
+        description: CUDA major version
+        required: true
+        default: "11"
+        type: choice
+        options:
+          - "11"
+          - "12"
+
+jobs:
+  docker:
+    runs-on: [self-hosted, Linux, X64, CUDA]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          context: ./images/linux/cuda/base
+          push: true
+          tags: martinkim0/scvi-tools:ubuntu-${{ inputs.ubuntu-version }}-mamba-${{ inputs.mamba-version}}-python-${{ inputs.python-version }}-cuda-${{ inputs.cuda-version }}
+          build-args: |
+            UBUNTU_VERSION=${{ inputs.ubuntu-version }}
+            MAMBA_VERSION=${{ inputs.mamba-version }}
+            PYTHON_VERSION=${{ inputs.python-version }}
+            CUDA_VERSION=${{ inputs.cuda-version }}
