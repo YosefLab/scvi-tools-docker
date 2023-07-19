@@ -1,38 +1,14 @@
 name: linux-cuda-base
 
 on:
-  workflow_dispatch:
-    inputs:
-      ubuntu-version:
-        description: Ubuntu version
-        required: true
-        default: latest
-        type: string
+  schedule:
+    - cron: "0 12 * * 0"  # runs at 12:00 UTC -> 05:00 PST on Sunday
 
-      mamba-version:
-        description: Mamba version
-        required: true
-        default: latest
-        type: string
-
-      python-version:
-        description: Python version
-        required: true
-        default: "3.11"
-        type: choice
-        options:
-          - "3.9"
-          - "3.10"
-          - "3.11"
-
-      cuda-version:
-        description: CUDA major version
-        required: true
-        default: "11"
-        type: choice
-        options:
-          - "11"
-          - "12"
+env:
+  ubuntu-version: latest
+  mamba-version: latest
+  python-version: "3.11"
+  cuda-version: "11"
 
 jobs:
   docker:
@@ -61,7 +37,7 @@ jobs:
           push: true
           tags: martinkim0/scvi-tools:ubuntu-${{ inputs.ubuntu-version }}-mamba-${{ inputs.mamba-version}}-python-${{ inputs.python-version }}-cuda-${{ inputs.cuda-version }}
           build-args: |
-            UBUNTU_VERSION=${{ inputs.ubuntu-version }}
-            MAMBA_VERSION=${{ inputs.mamba-version }}
-            PYTHON_VERSION=${{ inputs.python-version }}
-            CUDA_VERSION=${{ inputs.cuda-version }}
+            UBUNTU_VERSION=${{ env.ubuntu-version }}
+            MAMBA_VERSION=${{ env.mamba-version }}
+            PYTHON_VERSION=${{ env.python-version }}
+            CUDA_VERSION=${{ env.cuda-version }}
