@@ -33,7 +33,7 @@ jobs:
         with:
           context: ./images/linux/cuda/base
           push: true
-          tags: martinkim0/scvi-tools:py${{ matrix.python-version }}-cu${{ matrix.cuda-version }}
+          tags: martinkim0/scvi-tools:py${{ matrix.python-version }}-cu${{ matrix.cuda-version }}-base
           build-args: |
             PYTHON_VERSION=${{ matrix.python-version }}
             CUDA_VERSION=${{ matrix.cuda-version }}
