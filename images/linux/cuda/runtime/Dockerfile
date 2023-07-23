@@ -5,15 +5,10 @@ FROM martinkim0/scvi-tools:py${PYTHON_VERSION}-cu${CUDA_VERSION}-base
 ARG SCVI_TOOLS_VERSION=latest
 ENV SCVI_TOOLS_VERSION=${SCVI_TOOLS_VERSION}
 RUN if [ "$SCVI_TOOLS_VERSION" = "latest" ]; then \
-        pip install --no-cache-dir --upgrade  \
-        "scvi-tools @ git+https://github.com/scverse/scvi-tools" && \
-        pip cache purge ; \
+        pip install "scvi-tools @ git+https://github.com/scverse/scvi-tools" && \
     elif [ "$SCVI_TOOLS_VERSION" = "stable" ]; then \
-        pip install --no-cache-dir --upgrade  \
-        "scvi-tools" && \
-        pip cache purge ; \
+        pip install "scvi-tools" && \
     else \
-        pip install --no-cache-dir --upgrade \
-        "scvi-tools==${SCVI_TOOLS_VERSION}" && \
-        pip cache purge ; \
-    fi
+        pip install "scvi-tools==${SCVI_TOOLS_VERSION}" && \
+    fi && \
+        pip cache purge
