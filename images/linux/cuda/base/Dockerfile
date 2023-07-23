@@ -18,12 +18,12 @@ RUN mamba run -p /env \
     mamba run -p /env \
     python -m pip cache purge
 
+RUN mamba install -y -p /env \
+    git -c anaconda && \
+    mamba clean -ayf
+
 FROM ubuntu:latest
 
 COPY --from=mamba /env /env
 
 ENV PATH "/env/bin:$PATH"
-
-RUN apt update
-
-RUN apt install -y git
