@@ -7,10 +7,10 @@ ARG BRANCH_NAME=main
 ENV SCVI_TOOLS_VERSION=${SCVI_TOOLS_VERSION}
 ENV BRANCH_NAME=${BRANCH_NAME}
 RUN if [ "$SCVI_TOOLS_VERSION" = "latest" ]; then \
-        pip install --no-cache-dir "scvi-tools[all] @ git+https://github.com/scverse/scvi-tools@${BRANCH_NAME}" ; \
+        pip install --no-cache-dir "scvi-tools[tests] @ git+https://github.com/scverse/scvi-tools@${BRANCH_NAME}" ; \
     elif [ "$SCVI_TOOLS_VERSION" = "stable" ]; then \
-        pip install --no-cache-dir "scvi-tools[all]" ; \
+        pip install --no-cache-dir "scvi-tools[tests]" ; \
     else \
-        pip install --no-cache-dir "scvi-tools[all]==${SCVI_TOOLS_VERSION}" ; \
+        pip install --no-cache-dir "scvi-tools[tests]==${SCVI_TOOLS_VERSION}" ; \
     fi && \
         pip cache purge

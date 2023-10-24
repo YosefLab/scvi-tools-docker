@@ -1,15 +1,9 @@
-name: linux-cuda-devel
+name: linux-cuda-tests-latest
 
 on:
+  schedule:
+    - cron: "00 7 * * *"  # runs at 07:00 UTC -> 12:00 PST every day
   workflow_dispatch:
-    inputs:
-      scvi-tools-version:
-        description: "scvi-tools version"
-        required: true
-        default: "stable"
-        type: choice
-        options:
-        - "stable"
 
 jobs:
   docker:
@@ -37,10 +31,10 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          context: ./docker/devel
+          context: ./docker/tests
           push: true
-          tags: martinkim0/scvi-tools:py${{ matrix.python-version }}-cu${{ matrix.cuda-version }}-devel-${{ inputs.scvi-tools-version}}
+          tags: martinkim0/scvi-tools:py${{ matrix.python-version }}-cu${{ matrix.cuda-version }}-runtime-latest
           build-args: |
             PYTHON_VERSION=${{ matrix.python-version }}
             CUDA_VERSION=${{ matrix.cuda-version }}
-            SCVI_TOOLS_VERSION=${{ inputs.scvi-tools-version}}
+            SCVI_TOOLS_VERSION=latest

@@ -1,4 +1,4 @@
-name: linux-cuda-runtime-branch
+name: linux-cuda-tutorials-branch
 
 on:
   workflow_dispatch:
@@ -49,9 +49,9 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          context: ./docker/runtime
+          context: ./docker/tutorials
           push: true
-          tags: martinkim0/scvi-tools:py${{ inputs.python-version }}-cu${{ inputs.cuda-version }}-runtime-${{ inputs.branch-name }}
+          tags: martinkim0/scvi-tools:py${{ inputs.python-version }}-cu${{ inputs.cuda-version }}-tests-${{ inputs.branch-name }}
           build-args: |
             PYTHON_VERSION=${{ inputs.python-version }}
             CUDA_VERSION=${{ inputs.cuda-version }}

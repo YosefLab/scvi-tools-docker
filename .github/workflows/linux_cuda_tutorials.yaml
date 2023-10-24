@@ -1,4 +1,4 @@
-name: linux-cuda-devel
+name: linux-cuda-tutorials
 
 on:
   workflow_dispatch:
@@ -37,9 +37,9 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          context: ./docker/devel
+          context: ./docker/tutorials
           push: true
-          tags: martinkim0/scvi-tools:py${{ matrix.python-version }}-cu${{ matrix.cuda-version }}-devel-${{ inputs.scvi-tools-version}}
+          tags: martinkim0/scvi-tools:py${{ matrix.python-version }}-cu${{ matrix.cuda-version }}-tutorials-${{ inputs.scvi-tools-version}}
           build-args: |
             PYTHON_VERSION=${{ matrix.python-version }}
             CUDA_VERSION=${{ matrix.cuda-version }}
