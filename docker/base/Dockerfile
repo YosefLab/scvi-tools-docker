@@ -22,6 +22,10 @@ RUN mamba install -y -p /env \
     git -c anaconda && \
     mamba clean -ayf
 
+RUN mamba install -y -p /env \
+    gcc -c conda-forge && \
+    mamba clean -ayf
+
 FROM ubuntu:latest
 
 COPY --from=mamba /env /env
