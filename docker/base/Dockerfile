@@ -23,7 +23,7 @@ RUN mamba install -y -p /env \
     mamba clean -ayf
 
 RUN mamba install -y -p /env \
-    gcc -c conda-forge && \
+    gcc cxx-compiler -c conda-forge && \
     mamba clean -ayf
 
 FROM ubuntu:latest
