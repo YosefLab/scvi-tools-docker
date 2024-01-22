@@ -51,7 +51,7 @@ jobs:
         with:
           context: ./docker/devel
           push: true
-          tags: martinkim0/scvi-tools:py${{ inputs.python-version }}-cu${{ inputs.cuda-version }}-devel-${{ inputs.branch-name }}
+          tags: scverse/scvi-tools:py${{ inputs.python-version }}-cu${{ inputs.cuda-version }}-devel-${{ inputs.branch-name }}
           build-args: |
             PYTHON_VERSION=${{ inputs.python-version }}
             CUDA_VERSION=${{ inputs.cuda-version }}

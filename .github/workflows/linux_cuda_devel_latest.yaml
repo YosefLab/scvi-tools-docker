@@ -33,7 +33,7 @@ jobs:
         with:
           context: ./docker/devel
           push: true
-          tags: martinkim0/scvi-tools:py${{ matrix.python-version }}-cu${{ matrix.cuda-version }}-devel-latest
+          tags: scverse/scvi-tools:py${{ matrix.python-version }}-cu${{ matrix.cuda-version }}-devel-latest
           build-args: |
             PYTHON_VERSION=${{ matrix.python-version }}
             CUDA_VERSION=${{ matrix.cuda-version }}

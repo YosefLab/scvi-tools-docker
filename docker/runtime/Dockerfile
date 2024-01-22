@@ -1,6 +1,6 @@
 ARG PYTHON_VERSION=3.11
 ARG CUDA_VERSION=11
-FROM martinkim0/scvi-tools:py${PYTHON_VERSION}-cu${CUDA_VERSION}-base
+FROM scverse/scvi-tools:py${PYTHON_VERSION}-cu${CUDA_VERSION}-base
 
 ARG SCVI_TOOLS_VERSION=latest
 ARG BRANCH_NAME=main

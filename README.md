@@ -3,7 +3,7 @@
 A small set of Docker images for running and developing 
 [scvi-tools](https://github.com/scverse/scvi-tools). Images are available
 through 
-[Docker Hub](https://hub.docker.com/repository/docker/martinkim0/scvi-tools/general).
+[Docker Hub](https://hub.docker.com/repository/docker/scverse/scvi-tools/general).
 
 ### Update schedule
 
