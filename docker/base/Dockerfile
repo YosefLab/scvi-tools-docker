@@ -7,13 +7,13 @@ RUN mamba create --copy -y -p /env \
 
 ARG CUDA_VERSION=11
 RUN mamba install -y -p /env \
-    cudnn cudatoolkit cuda cuda-nvcc=${CUDA_VERSION} \
+    cudnn cudatoolkit cuda-nvcc=${CUDA_VERSION} \
     -c anaconda -c nvidia && \
     mamba clean -ayf
 
 ARG CUDA_VERSION=11
 RUN mamba install -y -p /env \
-    jaxlib=*=*cuda* jax pytorch torchvision torchaudio pytorch-cuda=${CUDA_VERSION} \
+    jaxlib=*=*cuda* jax cuda pytorch torchvision torchaudio pytorch-cuda=${CUDA_VERSION} \
     -c pytorch -c nvidia -c conda-forge && \
     mamba clean -ayf
 
