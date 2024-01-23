@@ -4,6 +4,22 @@ on:
   schedule:
     - cron: "0 12 * * 0"  # runs at 12:00 UTC -> 05:00 PST on Sunday
   workflow_dispatch:
+    inputs:
+      python-version:
+        description: "Python version"
+        required: true
+        default: "3.11"
+        options:
+          - "3.9"
+          - "3.10"
+          - "3.11"
+      cuda-version:
+        description: "CUDA version"
+        required: true
+        default: "11"
+        options:
+          - "11"
+          - "12"
 
 jobs:
   docker:
@@ -13,7 +29,7 @@ jobs:
       fail-fast: false
       matrix:
         python-version: ["3.9", "3.10", "3.11"]
-        cuda-version: ["11"]
+        cuda-version: ["11", "12"]
 
     steps:
       - name: Checkout
