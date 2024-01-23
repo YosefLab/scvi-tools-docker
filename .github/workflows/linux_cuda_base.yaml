@@ -9,6 +9,7 @@ on:
         description: "Python version"
         required: true
         default: "3.11"
+        type: choice
         options:
         - "3.9"
         - "3.10"
@@ -17,6 +18,7 @@ on:
         description: "CUDA version"
         required: true
         default: "11"
+        type: choice
         options:
         - "11"
         - "12"
