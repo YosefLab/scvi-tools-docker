@@ -7,7 +7,7 @@ RUN mamba create --copy -y -p /env \
 
 ARG CUDA_VERSION=11
 RUN mamba install -y -p /env \
-    cudnn cudatoolkit cuda-nvcc=${CUDA_VERSION} \
+    cudnn cudatoolkit cuda cuda-nvcc=${CUDA_VERSION} \
     -c anaconda -c nvidia && \
     mamba clean -ayf
 
