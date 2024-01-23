@@ -10,16 +10,16 @@ on:
         required: true
         default: "3.11"
         options:
-          - "3.9"
-          - "3.10"
-          - "3.11"
+        - "3.9"
+        - "3.10"
+        - "3.11"
       cuda-version:
         description: "CUDA version"
         required: true
         default: "11"
         options:
-          - "11"
-          - "12"
+        - "11"
+        - "12"
 
 jobs:
   docker:
