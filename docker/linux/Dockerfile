@@ -10,7 +10,7 @@ RUN if [ "${SCVI_TOOLS_VERSION}" = "latest" ]; then \
         pip install --no-cache-dir "scvi-tools[${DEPENDENCIES}] @ git+https://github.com/scverse/scvi-tools" ; \
     elif [ "${SCVI_TOOLS_VERSION}" = "stable" ]; then \
         pip install -U --no-cache-dir "scvi-tools[${DEPENDENCIES}]" ; \
-    elif [[ "${SCVI_TOOLS_VERSION}" =~ ^\d+\.\d+\.x ]]; then \
+    elif [ "${SCVI_TOOLS_VERSION}" =~ ^\d+\.\d+\.x$ ]; then \
         pip install --no-cache-dir "scvi-tools[${DEPENDENCIES}] @ git+https://github.com/scverse/scvi-tools@${SCVI_TOOLS_VERSION}" ; \
     else \
         pip install --no-cache-dir "scvi-tools[${DEPENDENCIES}]==${SCVI_TOOLS_VERSION}" ; \
