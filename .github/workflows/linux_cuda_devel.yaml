@@ -41,7 +41,7 @@ jobs:
 
       - uses: docker/build-push-action@v5
         with:
-          context: ./docker/linux
+          context: ./docker/optional
           push: true
           tags: scverse/scvi-tools:py${{ matrix.python-version }}-cu${{ matrix.cuda-version }}-devel-${{ inputs.scvi-tools-version }}
           build-args: |
