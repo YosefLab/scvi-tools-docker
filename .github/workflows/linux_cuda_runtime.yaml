@@ -10,11 +10,6 @@ on:
         required: true
         default: "latest"
         type: string
-      branch:
-        description: "branch name"
-        required: true
-        default: "main"
-        type: string
 
 jobs:
   docker:
