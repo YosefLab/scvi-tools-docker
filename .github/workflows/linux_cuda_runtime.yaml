@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: "latest/stable/sem_ver"
+        description: "latest/stable/sem_ver/branch"
         required: true
         default: "latest"
         type: string
@@ -41,9 +41,8 @@ jobs:
         id: defaults
         run: |
           INPUT_VERSION=${{ inputs.version }}
-          echo "version=${INPUT_VERSION:-"latest"}" >> $GITHUB_OUTPUT
-          INPUT_BRANCH=${{ inputs.branch }}
-          echo "branch=${INPUT_BRANCH:-"main"}" >> $GITHUB_OUTPUT
+          VERSION=${INPUT_VERSION:-"latest"}
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
 
       - uses: docker/build-push-action@v5
         with:
@@ -54,4 +53,3 @@ jobs:
             PYTHON_VERSION=${{ matrix.python-version }}
             CUDA_VERSION=${{ matrix.cuda-version }}
             SCVI_TOOLS_VERSION=${{ steps.defaults.outputs.version }}
-            BRANCH_NAME=${{ steps.defaults.outputs.branch }}
