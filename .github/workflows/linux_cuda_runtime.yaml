@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: "latest/stable/sem_ver/branch"
+        description: "latest/stable/semver/branch"
         required: true
         default: "latest"
         type: string
@@ -39,10 +39,22 @@ jobs:
           VERSION=${INPUT_VERSION:-"latest"}
           echo "version=${VERSION}" >> $GITHUB_OUTPUT
 
+          if [[ $VERSION == "latest" ]]; then
+            TARGET="latest"
+          elif [[ $VERSION == "stable" ]]; then
+            TARGET="stable"
+          elif [[ $VERSION =~ ^\d+\.\d+\.x$ ]]; then
+            VERSION="branch"
+          else
+            VERSION="semver"
+          fi
+          echo "target=${TARGET}" >> $GITHUB_OUTPUT
+
       - uses: docker/build-push-action@v5
         with:
           context: ./docker/linux
           push: true
+          target: ${{ steps.defaults.outputs.target }}
           tags: scverse/scvi-tools:py${{ matrix.python-version }}-cu${{ matrix.cuda-version }}-runtime-${{ steps.defaults.outputs.version }}
           build-args: |
             PYTHON_VERSION=${{ matrix.python-version }}
