@@ -41,9 +41,9 @@ jobs:
         id: defaults
         run: |
           INPUT_VERSION=${{ inputs.version }}
-          echo "{version}=${INPUT_VERSION:-"latest"}" >> $GITHUB_OUTPUT
+          echo "version=${INPUT_VERSION:-"latest"}" >> $GITHUB_OUTPUT
           INPUT_BRANCH=${{ inputs.branch }}
-          echo "{branch}=${INPUT_BRANCH:-"main"}" >> $GITHUB_OUTPUT
+          echo "branch=${INPUT_BRANCH:-"main"}" >> $GITHUB_OUTPUT
 
       - uses: docker/build-push-action@v5
         with:
