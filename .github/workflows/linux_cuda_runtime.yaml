@@ -44,9 +44,9 @@ jobs:
           elif [[ $VERSION == "stable" ]]; then
             TARGET="stable"
           elif [[ $VERSION =~ ^\d+\.\d+\.x$ ]]; then
-            VERSION="branch"
+            TARGET="branch"
           else
-            VERSION="semver"
+            TARGET="semver"
           fi
           echo "target=${TARGET}" >> $GITHUB_OUTPUT
 
