@@ -34,15 +34,21 @@ This repository contains the source Dockerfiles for the scvi-tools [Docker image
 
 -   Updated weekly Sunday at 05:00 PST
 -   We currently build images for `PYTHON_VERSION=[3.9, 3.10, 3.11]` and `CUDA_VERSION=[11]`
-    `py{PYTHON_VERSION}-cu{CUDA_VERSION}-runtime-{latest/stable/sem_ver}`: `base` image with only runtime dependencies
+
+`py{PYTHON_VERSION}-cu{CUDA_VERSION}-runtime-{latest/stable/sem_ver}`: `base` image with only runtime dependencies
+
 -   `latest`: Updated daily at 12:00 PST
 -   `stable`: Alias for the newest `sem_ver`
 -   `sem_ver`: Ppdated with each new stable release on the [main repository](https://github.com/scverse/scvi-tools)
-    `py{PYTHON_VERSION}-cu{CUDA_VERSION}-devel-{latest/stable/sem_ver}`: `base` image with development dependencies
+
+`py{PYTHON_VERSION}-cu{CUDA_VERSION}-devel-{latest/stable/sem_ver}`: `base` image with development dependencies
+
 -   `latest`: Updated daily at 12:00 PST
 -   `stable`: Alias for the newest `sem_ver`
 -   `sem_ver`: Updated with each new stable release on the [main repository](https://github.com/scverse/scvi-tools)
-    `py{PYTHON_VERSION}-cu{CUDA_VERSION}-devel-{latest/stable/sem_ver}`: `base` image with tutorial dependencies
+
+`py{PYTHON_VERSION}-cu{CUDA_VERSION}-devel-{latest/stable/sem_ver}`: `base` image with tutorial dependencies
+
 -   `latest`: Updated daily at 12:00 PST
 -   `stable`: Alias for the newest `sem_ver`
 -   `sem_ver`: Updated with each new stable release on the [main repository](https://github.com/scverse/scvi-tools)
