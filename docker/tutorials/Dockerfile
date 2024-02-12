@@ -9,7 +9,7 @@ ENV BRANCH_NAME=${BRANCH_NAME}
 RUN if [ "$SCVI_TOOLS_VERSION" = "latest" ]; then \
         pip install --no-cache-dir "scvi-tools[tutorials] @ git+https://github.com/scverse/scvi-tools@${BRANCH_NAME}" ; \
     elif [ "$SCVI_TOOLS_VERSION" = "stable" ]; then \
-        pip install --no-cache-dir "scvi-tools[tutorials]" ; \
+        pip install -U --no-cache-dir "scvi-tools[tutorials]" ; \
     else \
         pip install --no-cache-dir "scvi-tools[tutorials]==${SCVI_TOOLS_VERSION}" ; \
     fi && \
