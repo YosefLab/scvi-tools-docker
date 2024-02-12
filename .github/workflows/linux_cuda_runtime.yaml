@@ -43,9 +43,9 @@ jobs:
         id: defaults
         run: |
           INPUT_VERSION=${{ inputs.version }}
-          VERSION=${INPUT_VERSION:-latest}
+          echo "::set-output name=version::${INPUT_VERSION:-"latest"}"
           INPUT_BRANCH=${{ inputs.branch }}
-          BRANCH=${INPUT_BRANCH:-main}
+          echo "::set-output name=branch::${INPUT_BRANCH:-"main"}"
 
       - uses: docker/build-push-action@v5
         with:
@@ -55,5 +55,5 @@ jobs:
           build-args: |
             PYTHON_VERSION=${{ matrix.python-version }}
             CUDA_VERSION=${{ matrix.cuda-version }}
-            SCVI_TOOLS_VERSION=${{ steps.defaults.outputs.VERSION }}
-            BRANCH_NAME=${{ steps.defaults.outputs.BRANCH }}
+            SCVI_TOOLS_VERSION=${{ steps.defaults.outputs.version }}
+            BRANCH_NAME=${{ steps.defaults.outputs.branch }}
