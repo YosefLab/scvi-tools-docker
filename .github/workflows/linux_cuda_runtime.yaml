@@ -39,6 +39,14 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Set default inputs
+        id: defaults
+        run: |
+          INPUT_VERSION=${{ inputs.version }}
+          VERSION=${INPUT_VERSION:-latest}
+          INPUT_BRANCH=${{ inputs.branch }}
+          BRANCH=${INPUT_BRANCH:-main}
+
       - uses: docker/build-push-action@v5
         with:
           context: ./docker/linux
@@ -47,5 +55,5 @@ jobs:
           build-args: |
             PYTHON_VERSION=${{ matrix.python-version }}
             CUDA_VERSION=${{ matrix.cuda-version }}
-            SCVI_TOOLS_VERSION=${{ inputs.scvi-tools-version }}
-            BRANCH_NAME=${{ inputs.branch }}
+            SCVI_TOOLS_VERSION=${{ steps.defaults.outputs.VERSION }}
+            BRANCH_NAME=${{ steps.defaults.outputs.BRANCH }}
