@@ -43,7 +43,7 @@ jobs:
             TARGET="latest"
           elif [[ "${VERSION}" == "stable" ]]; then
             TARGET="stable"
-          elif [[ "${VERSION}" =~ ^\d+\.\d+\.x ]]; then
+          elif [[ "${VERSION}" =~ \d+\.\d+\.x ]]; then
             TARGET="branch"
           else
             TARGET="semver"
