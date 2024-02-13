@@ -67,6 +67,7 @@ jobs:
 
           INPUT_DEPENDENCIES=${{ inputs.dependencies }}
           DEPENDENCIES=${INPUT_DEPENDENCIES:-"runtime"}
+          echo "dependencies=${DEPENDENCIES}" >> $GITHUB_OUTPUT
 
       - uses: docker/build-push-action@v5
         with:
