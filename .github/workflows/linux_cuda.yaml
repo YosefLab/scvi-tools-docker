@@ -20,34 +20,6 @@ on:
         required: true
         type: string
 
-  workflow_dispatch:
-    inputs:
-      python:
-        description: "Python version"
-        required: true
-        default: "3.11"
-        type: choice
-        options:
-          - "3.9"
-          - "3.10"
-          - "3.11"
-      cuda:
-        description: "CUDA version"
-        required: true
-        default: "11"
-        type: choice
-        options:
-          - "11"
-      version:
-        description: "latest/stable/semver/branch"
-        required: true
-        default: "latest"
-        type: string
-      dependencies:
-        description: "optional dependencies"
-        required: false
-        type: string
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -71,6 +43,14 @@ jobs:
           VERSION=${INPUT_VERSION:-"latest"}
           echo "version=${VERSION}" >> $GITHUB_OUTPUT
 
+          VERSIONTAG=${VERSION}
+          if [[ $VERSIONTAG == "cuda" ]]; then
+            VERSIONTAG=""
+          else
+            VERSIONTAG="-${VERSIONTAG}"
+          fi
+          echo "versiontag=${VERSIONTAG}" >> $GITHUB_OUTPUT
+
           RELEASE_BRANCH_REGEX="([0-9]+\.){2}(x)"
           if [[ $VERSION == "latest" ]]; then
             TARGET="latest"
@@ -78,6 +58,8 @@ jobs:
             TARGET="stable"
           elif [[ $VERSION =~ $RELEASE_BRANCH_REGEX ]]; then
             TARGET="branch"
+          elif [[ $VERSION == "cuda" ]]; then
+            TARGET="cuda"
           else
             TARGET="semver"
           fi
@@ -88,7 +70,7 @@ jobs:
           context: ./docker
           push: true
           target: ${{ steps.build.outputs.target }}
-          tags: scverse/scvi-tools:py${{ inputs.python }}-cu${{ inputs.cuda }}-devel-${{ steps.build.outputs.version }}
+          tags: scverse/scvi-tools:py${{ inputs.python }}-cu${{ inputs.cuda }}-${{ inputs.dependencies }}${{ steps.build.outputs.versiontag }}
           build-args: |
             PYTHON_VERSION=${{ inputs.python }}
             CUDA_VERSION=${{ inputs.cuda }}
