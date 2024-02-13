@@ -1,4 +1,4 @@
-FROM condaforge/miniforge3:latest AS cuda
+FROM condaforge/miniforge3:latest AS base
 
 RUN head -n -1 "${HOME}/.bashrc" > "${HOME}/tmp.bashrc" ; \
     mv "${HOME}/tmp.bashrc" "${HOME}/.bashrc"
@@ -25,10 +25,6 @@ RUN conda init --reverse && \
     rm -f "${HOME}/.condarc" && \
     rm -rf ${HOME}/.conda && \
     rm -rf /opt/conda
-
-ARG PYTHON_VERSION
-ARG CUDA_VERSION
-FROM scverse/scvi-tools:py${PYTHON_VERSION}-cu${CUDA_VERSION}-base AS base
 
 FROM base AS latest
 ARG DEPENDENCIES=""
