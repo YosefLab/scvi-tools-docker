@@ -1,14 +1,14 @@
-FROM condaforge/miniforge3:latest AS cuda
+FROM condaforge/miniforge3:latest AS base
 
 RUN head -n -1 "${HOME}/.bashrc" > "${HOME}/tmp.bashrc" ; \
     mv "${HOME}/tmp.bashrc" "${HOME}/.bashrc"
 
-ARG PYTHON_VERSION=3.11
+ARG PYTHON_VERSION
 RUN mamba create --copy -y -p /env \
     python=${PYTHON_VERSION} -c conda-forge && \
     mamba clean -ayf
 
-ARG CUDA_VERSION=11
+ARG CUDA_VERSION
 RUN CONDA_OVERRIDE_CUDA=${CUDA_VERSION} mamba install -y -p /env \
     pytorch torchvision torchaudio pytorch-cuda=${CUDA_VERSION} \
     jaxlib=*=*cuda* jax cuda-nvcc -c pytorch -c conda-forge -c nvidia && \
@@ -25,10 +25,6 @@ RUN conda init --reverse && \
     rm -f "${HOME}/.condarc" && \
     rm -rf ${HOME}/.conda && \
     rm -rf /opt/conda
-
-ARG PYTHON_VERSION=3.11
-ARG CUDA_VERSION=11
-FROM scverse/scvi-tools:py${PYTHON_VERSION}-cu${CUDA_VERSION}-base AS base
 
 FROM base AS latest
 ARG DEPENDENCIES=""
