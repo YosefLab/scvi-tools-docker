@@ -2,7 +2,7 @@ name: Linux (CUDA, base)
 
 on:
   schedule:
-    - cron: "0 12 * * 0" # runs at 12:00 UTC/05:00 PST on Sunday
+    - cron: "0 7 * * 0" # runs at 07:00 UTC/12:00 PST on Sunday
   workflow_dispatch:
 
 jobs:
