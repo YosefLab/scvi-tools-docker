@@ -1,4 +1,4 @@
-FROM condaforge/miniforge3:latest AS conda
+FROM condaforge/miniforge3:latest AS cuda
 
 ARG PYTHON_VERSION=3.11
 RUN mamba create --copy -y -p /env \
@@ -12,16 +12,11 @@ RUN CONDA_OVERRIDE_CUDA=${CUDA_VERSION} mamba install -y -p /env \
     mamba clean -ayf
 
 RUN mamba install -y -p /env \
-    git -c anaconda && \
-    mamba clean -ayf
-
-RUN mamba install -y -p /env \
     gcc cxx-compiler -c conda-forge && \
     mamba clean -ayf
 
-FROM ubuntu:latest AS cuda
-COPY --from=conda /env /env
 ENV PATH "/env/bin:$PATH"
+RUN rm -rf /opt/conda
 
 ARG PYTHON_VERSION=3.11
 ARG CUDA_VERSION=11
