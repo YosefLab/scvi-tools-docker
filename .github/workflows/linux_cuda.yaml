@@ -31,7 +31,6 @@ on:
           - "3.9"
           - "3.10"
           - "3.11"
-
       cuda:
         description: "CUDA version"
         required: true
@@ -39,13 +38,11 @@ on:
         type: choice
         options:
           - "11"
-
       version:
         description: "latest/stable/semver/branch"
         required: true
         default: "latest"
         type: string
-
       dependencies:
         description: "optional dependencies"
         required: false
