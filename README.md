@@ -30,24 +30,24 @@ This repository contains the source Dockerfiles for the scvi-tools [Docker image
 
 ## Tags
 
-`py{PYTHON_VERSION}-cu{CUDA_VERSION}-base`: CUDA-enabled PyTorch and JAX installations - updated weekly Sunday at 05:00 PST
+`py{PYTHON_VERSION}-cu{CUDA_VERSION}-base`: CUDA-based PyTorch and JAX installations
 
 -   Updated weekly Sunday at 05:00 PST
 -   We currently build images for `PYTHON_VERSION=[3.9, 3.10, 3.11]` and `CUDA_VERSION=[11, 12]`
 
-`py{PYTHON_VERSION}-cu{CUDA_VERSION}-runtime-{latest/stable/sem_ver}`: `base` image with only runtime dependencies
-
--   `latest`: Updated daily at 12:00 PST
--   `stable`: Alias for the most recent `semver`
--   `semver`: Ppdated with each new stable release on the [main repository](https://github.com/scverse/scvi-tools)
-
-`py{PYTHON_VERSION}-cu{CUDA_VERSION}-devel-{latest/stable/sem_ver}`: `base` image with development dependencies
+`py{PYTHON_VERSION}-cu{CUDA_VERSION}-runtime-{latest/stable/semver}`: `base` image with runtime dependencies
 
 -   `latest`: Updated daily at 12:00 PST
 -   `stable`: Alias for the most recent `semver`
 -   `semver`: Updated with each new stable release on the [main repository](https://github.com/scverse/scvi-tools)
 
-`py{PYTHON_VERSION}-cu{CUDA_VERSION}-devel-{latest/stable/sem_ver}`: `base` image with tutorial dependencies
+`py{PYTHON_VERSION}-cu{CUDA_VERSION}-dev-{latest/stable/semver}`: `base` image with development dependencies
+
+-   `latest`: Updated daily at 12:00 PST
+-   `stable`: Alias for the most recent `semver`
+-   `semver`: Updated with each new stable release on the [main repository](https://github.com/scverse/scvi-tools)
+
+`py{PYTHON_VERSION}-cu{CUDA_VERSION}-tutorials-{latest/stable/semver}`: `base` image with tutorial dependencies
 
 -   `latest`: Updated daily at 12:00 PST
 -   `stable`: Alias for the most recent `semver`
