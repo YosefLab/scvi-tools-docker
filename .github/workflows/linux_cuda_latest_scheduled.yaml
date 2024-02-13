@@ -13,7 +13,7 @@ jobs:
         python: ["3.9", "3.10", "3.11"]
         cuda: ["11", "12"]
         version: ["latest"]
-        dependencies: ["", "dev", "test"]
+        dependencies: ["", "dev", "tutorials"]
 
     uses: ./.github/workflows/linux_cuda.yaml
     with:
