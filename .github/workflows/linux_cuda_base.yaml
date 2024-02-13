@@ -28,8 +28,9 @@ jobs:
 
       - uses: docker/build-push-action@v5
         with:
-          context: ./docker/base
+          context: ./docker
           push: true
+          target: cuda
           tags: scverse/scvi-tools:py${{ matrix.python-version }}-cu${{ matrix.cuda-version }}-base
           build-args: |
             PYTHON_VERSION=${{ matrix.python-version }}
