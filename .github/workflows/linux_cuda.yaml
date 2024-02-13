@@ -59,7 +59,7 @@ jobs:
           elif [[ $VERSION =~ $RELEASE_BRANCH_REGEX ]]; then
             TARGET="branch"
           elif [[ $VERSION == "cuda" ]]; then
-            TARGET="cuda"
+            TARGET="base"
           else
             TARGET="semver"
           fi
