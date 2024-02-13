@@ -1,4 +1,4 @@
-name: Linux (CUDA, devel)
+name: Linux (CUDA, runtime)
 
 on:
   schedule:
@@ -6,14 +6,14 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: "latest/stable/sem_ver"
+        description: "latest/stable/semver/branch"
         required: true
         default: "latest"
         type: string
-      branch:
-        description: "branch name"
-        required: true
-        default: "main"
+      dependencies:
+        description: "optional dependencies"
+        required: false
+        default: ""
         type: string
 
 jobs:
@@ -28,6 +28,7 @@ jobs:
       matrix:
         python-version: ["3.9", "3.10", "3.11"]
         cuda-version: ["11"]
+        dependencies: ["dev", "test"]
 
     steps:
       - uses: actions/checkout@v4
@@ -41,18 +42,29 @@ jobs:
         id: defaults
         run: |
           INPUT_VERSION=${{ inputs.version }}
-          echo "::set-output name=version::${INPUT_VERSION:-"latest"}"
-          INPUT_BRANCH=${{ inputs.branch }}
-          echo "::set-output name=branch::${INPUT_BRANCH:-"main"}"
+          VERSION=${INPUT_VERSION:-"latest"}
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+
+          RELEASE_BRANCH_REGEX="([0-9]+\.){2}(x)"
+          if [[ $VERSION == "latest" ]]; then
+            TARGET="latest"
+          elif [[ $VERSION == "stable" ]]; then
+            TARGET="stable"
+          elif [[ $VERSION =~ $RELEASE_BRANCH_REGEX ]]; then
+            TARGET="branch"
+          else
+            TARGET="semver"
+          fi
+          echo "target=${TARGET}" >> $GITHUB_OUTPUT
 
       - uses: docker/build-push-action@v5
         with:
           context: ./docker/linux
           push: true
+          target: ${{ steps.defaults.outputs.target }}
           tags: scverse/scvi-tools:py${{ matrix.python-version }}-cu${{ matrix.cuda-version }}-devel-${{ steps.defaults.outputs.version }}
           build-args: |
             PYTHON_VERSION=${{ matrix.python-version }}
             CUDA_VERSION=${{ matrix.cuda-version }}
             SCVI_TOOLS_VERSION=${{ steps.defaults.outputs.version }}
-            BRANCH_NAME=${{ steps.defaults.outputs.branch }}
             DEPENDENCIES=dev
