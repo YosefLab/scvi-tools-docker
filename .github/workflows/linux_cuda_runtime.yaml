@@ -16,5 +16,10 @@ jobs:
         dependencies: ["", "dev", "test"]
 
     uses: ./.github/workflows/linux_cuda.yaml
+    with:
+      python: ${{ matrix.python }}
+      cuda: ${{ matrix.cuda }}
+      version: ${{ matrix.version }}
+      dependencies: ${{ matrix.dependencies }}
 
     secrets: inherit
