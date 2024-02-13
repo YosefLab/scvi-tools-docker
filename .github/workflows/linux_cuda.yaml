@@ -6,28 +6,16 @@ on:
       python:
         description: "Python version"
         required: true
-        default: "3.11"
-        type: choice
-        options:
-        - "3.9"
-        - "3.10"
-        - "3.11"
       cuda:
         description: "CUDA version"
         required: true
-        default: "11"
-        type: choice
-        options:
-        - "11"
       version:
         description: "latest/stable/semver/branch"
         required: true
-        default: "latest"
-        type: string
       dependencies:
         description: "optional dependencies"
         required: false
-        type: string
+
   workflow_dispatch:
     inputs:
       python:
@@ -36,21 +24,24 @@ on:
         default: "3.11"
         type: choice
         options:
-        - "3.9"
-        - "3.10"
-        - "3.11"
+          - "3.9"
+          - "3.10"
+          - "3.11"
+
       cuda:
         description: "CUDA version"
         required: true
         default: "11"
         type: choice
         options:
-        - "11"
+          - "11"
+
       version:
         description: "latest/stable/semver/branch"
         required: true
         default: "latest"
         type: string
+
       dependencies:
         description: "optional dependencies"
         required: false
