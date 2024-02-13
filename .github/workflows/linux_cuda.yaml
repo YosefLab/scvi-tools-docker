@@ -38,6 +38,7 @@ on:
         type: choice
         options:
           - "11"
+          - "12"
       version:
         description: "latest/stable/semver/branch"
         required: true
