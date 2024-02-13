@@ -1,5 +1,8 @@
 FROM condaforge/miniforge3:latest AS cuda
 
+RUN head -n -1 "${HOME}/.bashrc" > "${HOME}/tmp.bashrc" ; \
+    mv "${HOME}/tmp.bashrc" "${HOME}/.bashrc"
+
 ARG PYTHON_VERSION=3.11
 RUN mamba create --copy -y -p /env \
     python=${PYTHON_VERSION} -c conda-forge && \
@@ -16,7 +19,12 @@ RUN mamba install -y -p /env \
     mamba clean -ayf
 
 ENV PATH "/env/bin:$PATH"
-RUN rm -rf /opt/conda
+
+RUN conda init --reverse && \
+    rm -rf $(conda info --base) && \
+    rm -f "${HOME}/.condarc" && \
+    rm -rf ${HOME}/.conda && \
+    rm -rf /opt/conda
 
 ARG PYTHON_VERSION=3.11
 ARG CUDA_VERSION=11
