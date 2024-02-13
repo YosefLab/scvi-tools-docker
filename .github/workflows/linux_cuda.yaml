@@ -88,7 +88,7 @@ jobs:
 
       - uses: docker/build-push-action@v5
         with:
-          context: ./docker/linux
+          context: ./docker
           push: true
           target: ${{ steps.build.outputs.target }}
           tags: scverse/scvi-tools:py${{ inputs.python }}-cu${{ inputs.cuda }}-devel-${{ steps.build.outputs.version }}
