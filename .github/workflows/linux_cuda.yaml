@@ -6,15 +6,19 @@ on:
       python:
         description: "Python version"
         required: true
+        type: string
       cuda:
         description: "CUDA version"
         required: true
+        type: string
       version:
         description: "latest/stable/semver/branch"
         required: true
+        type: string
       dependencies:
         description: "optional dependencies"
-        required: false
+        required: true
+        type: string
 
   workflow_dispatch:
     inputs:
