@@ -1,0 +1,25 @@
+name: Linux (CUDA, latest scheduled)
+
+on:
+  schedule:
+    - cron: "00 7 * * *" # runs at 07:00 UTC/12:00 PST every day
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.9", "3.10", "3.11"]
+        cuda: ["11"]
+        version: ["latest"]
+        dependencies: ["", "dev", "test"]
+
+    uses: ./.github/workflows/linux_cuda.yaml
+    with:
+      python: ${{ matrix.python }}
+      cuda: ${{ matrix.cuda }}
+      version: ${{ matrix.version }}
+      dependencies: ${{ matrix.dependencies }}
+
+    secrets: inherit
