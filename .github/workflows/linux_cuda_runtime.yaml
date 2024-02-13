@@ -39,11 +39,11 @@ jobs:
           VERSION=${INPUT_VERSION:-"latest"}
           echo "version=${VERSION}" >> $GITHUB_OUTPUT
 
-          if [[ $VERSION == "latest" ]]; then
+          if [[ "$VERSION" == "latest" ]]; then
             TARGET="latest"
-          elif [[ $VERSION == "stable" ]]; then
+          elif [[ "$VERSION" == "stable" ]]; then
             TARGET="stable"
-          elif [[ $VERSION =~ ^\d+\.\d+\.x ]]; then
+          elif [[ "$VERSION" =~ ^\d+\.\d+\.x ]]; then
             TARGET="branch"
           else
             TARGET="semver"
