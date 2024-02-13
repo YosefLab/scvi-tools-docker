@@ -8,6 +8,11 @@ on:
 jobs:
   docker:
     runs-on: [self-hosted, Linux, X64, CUDA]
+
+    container:
+      image: ubuntu:22.04
+      options: --user root --gpus all
+
     defaults:
       run:
         shell: bash -e {0} # -e to fail on error
