@@ -4,7 +4,7 @@ on:
   workflow_call:
     inputs:
       python:
-        desription: "Python version"
+        description: "Python version"
         required: true
         default: "3.11"
         type: choice
@@ -31,7 +31,7 @@ on:
   workflow_dispatch:
     inputs:
       python:
-        desription: "Python version"
+        description: "Python version"
         required: true
         default: "3.11"
         type: choice
