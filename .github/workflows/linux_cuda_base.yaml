@@ -7,7 +7,7 @@ on:
 
 jobs:
   docker:
-    runs-on: [self-hosted, Linux, X64, CUDA]
+    runs-on: ubuntu-latest
 
     container:
       image: ubuntu:22.04
