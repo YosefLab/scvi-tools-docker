@@ -26,14 +26,9 @@ RUN mamba install -y -p /env \
     gcc cxx-compiler -c conda-forge && \
     mamba clean -ayf
 
-FROM ubuntu:latest AS cuda
-
+FROM ubuntu:latest AS base
 COPY --from=mamba /env /env
 ENV PATH "/env/bin:$PATH"
-
-ARG PYTHON_VERSION=3.11
-ARG CUDA_VERSION=11
-FROM scverse/scvi-tools:py${PYTHON_VERSION}-cu${CUDA_VERSION}-base AS base
 
 FROM base AS latest
 ARG DEPENDENCIES=""
