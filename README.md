@@ -3,6 +3,8 @@
 [![Discourse](https://img.shields.io/discourse/posts?color=yellow&logo=discourse&server=https%3A%2F%2Fdiscourse.scverse.org)](https://discourse.scverse.org/)
 [![Chat](https://img.shields.io/badge/zulip-join_chat-brightgreen.svg)](https://scverse.zulipchat.com/)
 [![Powered by NumFOCUS][badge-numfocus]][link-numfocus]
+[![Linux (CUDA, base)](https://github.com/YosefLab/scvi-tools-docker/actions/workflows/linux_cuda_base.yaml/badge.svg)](https://github.com/YosefLab/scvi-tools-docker/actions/workflows/linux_cuda_base.yaml)
+[![Linux (CUDA, latest scheduled)](https://github.com/YosefLab/scvi-tools-docker/actions/workflows/linux_cuda_latest_scheduled.yaml/badge.svg)](https://github.com/YosefLab/scvi-tools-docker/actions/workflows/linux_cuda_latest_scheduled.yaml)
 
 [scvi-tools](https://scvi-tools.org/) (single-cell variational inference
 tools) is a package for probabilistic modeling and analysis of single-cell omics
