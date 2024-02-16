@@ -1,0 +1,50 @@
+name: Linux (CUDA, manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "semver"
+        required: true
+        default: "latest"
+        type: string
+
+      dependencies:
+        description: "optional dependencies"
+        required: false
+        type: string
+
+jobs:
+  build-semver:
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.9", "3.10", "3.11"]
+        cuda: ["11", "12"]
+        dependencies: ["", "dev", "tutorials"]
+
+    uses: ./.github/workflows/linux_cuda.yaml
+    with:
+      python: ${{ matrix.python }}
+      cuda: ${{ matrix.cuda }}
+      version: ${{ inputs.version }}
+      dependencies: ${{ matrix.dependencies }}
+
+    secrets: inherit
+
+  build-stable:
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.9", "3.10", "3.11"]
+        cuda: ["11", "12"]
+        dependencies: ["", "dev", "tutorials"]
+
+    uses: ./.github/workflows/linux_cuda.yaml
+    with:
+      python: ${{ matrix.python }}
+      cuda: ${{ matrix.cuda }}
+      version: stable
+      dependencies: ${{ matrix.dependencies }}
+
+    secrets: inherit

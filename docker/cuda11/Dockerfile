@@ -8,15 +8,22 @@ RUN mamba create --copy -y -p /env \
     python=${PYTHON_VERSION} -c conda-forge && \
     mamba clean -ayf
 
-ARG CUDA_VERSION
-RUN CONDA_OVERRIDE_CUDA=${CUDA_VERSION} mamba install -y -p /env \
-    pytorch torchvision torchaudio pytorch-cuda=${CUDA_VERSION} \
-    jaxlib=*=*cuda* jax cuda-nvcc -c pytorch -c conda-forge -c nvidia && \
-    mamba clean -ayf
-
 RUN mamba install -y -p /env \
     gcc cxx-compiler -c conda-forge && \
     mamba clean -ayf
+
+ARG CUDA_VERSION=11
+RUN CONDA_OVERRIDE_CUDA=${CUDA_VERSION} mamba install -y -p /env \
+    pytorch torchvision torchaudio pytorch-cuda=${CUDA_VERSION} \
+    -c pytorch -c nvidia && \
+    mamba clean -ayf
+
+ARG CUDA_VERSION=11
+RUN mamba run -p /env \
+    python -m pip install --no-cache-dir -U "jax[cuda${CUDA_VERSION}_pip]" \
+    -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html && \
+    mamba run -p /env \
+    python -m pip cache purge
 
 ENV PATH "/env/bin:$PATH"
 
