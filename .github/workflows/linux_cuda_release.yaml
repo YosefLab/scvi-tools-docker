@@ -9,11 +9,6 @@ on:
         default: "latest"
         type: string
 
-      dependencies:
-        description: "optional dependencies"
-        required: false
-        type: string
-
 jobs:
   build-semver:
     strategy:
