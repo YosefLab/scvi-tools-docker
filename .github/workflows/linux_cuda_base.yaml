@@ -1,4 +1,4 @@
-name: Linux (CUDA, base)
+name: linux (cuda, base)
 
 on:
   schedule:

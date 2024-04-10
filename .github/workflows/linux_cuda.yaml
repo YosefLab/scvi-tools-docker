@@ -1,4 +1,4 @@
-name: Linux (CUDA)
+name: linux (cuda)
 
 on:
   workflow_call:
