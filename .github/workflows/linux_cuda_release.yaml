@@ -1,4 +1,4 @@
-name: Linux (CUDA, release)
+name: linux (cuda, release)
 
 on:
   workflow_dispatch:

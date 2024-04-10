@@ -1,4 +1,4 @@
-name: Linux (CUDA, latest scheduled)
+name: linux (cuda, latest scheduled)
 
 on:
   schedule:
