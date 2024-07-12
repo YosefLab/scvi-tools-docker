@@ -14,6 +14,9 @@ analysis of single-cell omics data, built on top of [PyTorch] and [AnnData].
 
 # Docker images
 
+IMPORTANT: This repository is deprecated. Please see the updated images in the [GitHub Container
+Registry](https://github.com/scverse/scvi-tools/pkgs/container/scvi-tools)
+
 This repository contains the source files for our [Docker images].
 
 ## Tags
